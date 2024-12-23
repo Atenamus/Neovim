@@ -43,7 +43,6 @@ return {
 
 		telescope.load_extension("fzf")
 		telescope.load_extension("themes")
-		telescope.load_extension("harpoon")
 
 		local keymap = vim.keymap
 		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "[F]ind [F]iles" }) -- all in the cwd
