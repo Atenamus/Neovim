@@ -41,3 +41,6 @@ opt.foldcolumn = "1"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
+
+--terminal options'
+vim.o.shell = "pwsh -NoLogo"

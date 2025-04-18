@@ -1,3 +1,4 @@
+-- lazy.lua
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -11,7 +12,18 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "atenamus.plugins" }, { import = "atenamus.plugins.lsp" } }, {
+-- Set up Lazy.nvim plugins
+require("lazy").setup({
+	{ import = "atenamus.plugins" },
+	{ import = "atenamus.plugins.lsp" },
+	-- {
+	-- 	dir = vim.fn.stdpath("config") .. "/lua/atenamus/plugins/present.nvim",
+	-- 	name = "present.nvim",
+	-- 	config = function()
+	-- 		require("present")
+	-- 	end,
+	-- },
+}, {
 	checker = {
 		enabled = true,
 		notify = false,

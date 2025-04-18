@@ -18,3 +18,5 @@ keymap.set("n", "<leader>bo", "<cmd>enew<CR>", { desc = "[B]uffer [O]pen" })
 keymap.set("n", "<leader>bx", "<cmd>bdelete<CR>", { desc = "[B]uffer [C]lose" })
 keymap.set("n", "<leader>b]", "<cmd>bnext<CR>", { desc = "[B]uffer [N]ext" })
 keymap.set("n", "<leader>b[", "<cmd>bprevious<CR>", { desc = "[B]uffer [P]rev" })
+
+keymap.set("n", "<leader>S", "<cmd>:source<cr>")

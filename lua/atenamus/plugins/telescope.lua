@@ -1,8 +1,7 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	branch = "0.1.x",
+	tag = "0.1.8",
 	dependencies = {
-		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
 		"folke/todo-comments.nvim",
@@ -15,27 +14,27 @@ return {
 
 		telescope.setup({
 			defaults = {
-				path_display = { "smart" },
-				mappings = {
-					i = {
-						["<C-k>"] = actions.move_selection_previous,
-						["<C-j>"] = actions.move_selection_next,
-						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+				path = "smart",
+				picker = {
+					find_file = {
+						hidden = true,
+						themes = "ivy",
 					},
 				},
-			},
-			extensions = {
-				themes = {
-					light_themes = {
-						ignore = true,
-						keywords = { "light", "day", "frappe" },
-					},
-					dark_themes = {
-						ignore = false,
-						keywords = { "dark", "night", "black" },
-					},
-					persist = {
-						enabled = true,
+				extensions = {
+					fzf = {},
+					themes = {
+						light_themes = {
+							ignore = true,
+							keywords = { "light", "day", "frappe" },
+						},
+						dark_themes = {
+							ignore = false,
+							keywords = { "dark", "night", "black" },
+						},
+						persist = {
+							enabled = true,
+						},
 					},
 				},
 			},
@@ -46,9 +45,6 @@ return {
 
 		local keymap = vim.keymap
 		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "[F]ind [F]iles" }) -- all in the cwd
-		keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "[F]ind [R]ecent" })
-		keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "[F]ind [S]tring" })
-		keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "[F]ind string under [C]ursor" })
 		keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "[F]ind [T]odos" })
 		keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[] Find existing buffers" })
 		keymap.set("n", "<leader>/", function()
@@ -63,5 +59,17 @@ return {
 			":Telescope themes<CR>",
 			{ noremap = true, silent = true, desc = "[T]heme Select" }
 		)
+		keymap.set("n", "<leader>en", function()
+			require("telescope.builtin").find_files({
+				cwd = vim.fn.stdpath("config"),
+			})
+		end, { desc = "[E]dit [N]eovim" })
+		keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
+		keymap.set("n", "<leader>fs", require("telescope.builtin").live_grep, { desc = "[F]ind [S]tring" })
+
+		-- Git Keymaps
+		keymap.set("n", "<leader>gC", require("telescope.builtin").git_commits, { desc = "[G]it [C]ommits" })
+		keymap.set("n", "<leader>gB", require("telescope.builtin").git_branches, { desc = "[G]it [B]ranches" })
+		keymap.set("n", "<leader>gS", require("telescope.builtin").git_status, { desc = "[G]it [S]tatus" })
 	end,
 }
